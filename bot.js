@@ -7,6 +7,9 @@ client.on('ready', () => {
 
 //الاوامر//
 
+client.on('ready', () => {                           
+client.user.setGame(`9 Help By: 9 L N G`,'https://www.twitch.tv/tarikrs');                                                                                                                                                                                                                                                                                                                                                                                                                             client.user.setGame(`-help | On 20 Servers`,'https://www.twitch.tv/v5bz');
+});    
 
 client.on("message", message => {
  if (message.content === "9 help By:9LNG") {
