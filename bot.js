@@ -514,32 +514,56 @@ client.on('message', message => {
 
 
 
-client.on('message', message => {
-var prefix = "f!";
 
-    if (message.author.id === client.user.id) return;
-    if (message.guild) {
-   let embed = new Discord.RichEmbed()
-    let args = message.content.split(' ').slice(1).join(' ');
-if(message.content.split(' ')[0] == prefix + 'bc') {
-    if (!args[1]) {
-message.channel.send("**f!bc <message>**");
-return;
-}
-        message.guild.members.forEach(m => {
+client.on('message', message => { // هاذا للبرودكسات
+        var prefix = 'f!'; // هنا تقدر تغير البرفكس
+	var command = message.content.split(" ")[0];
+	if(command == prefix + 'bc') { // الكوماند !bc
+		if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You don`t have **MANAGE_MESSAGES** permission!");
+		var args = message.content.split(' ').slice(1).join(' ');
+		if(message.author.bot) return;
+		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc كلامك`);
+		if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You don`t have **MANAGE_MESSAGES** permission!");
+		
+		let bcSure = new Discord.RichEmbed()
+		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
+		.setThumbnail(client.user.avatarURL)
+		.setColor('RANDOM')
+		.setDescription(`**\n:envelope: ➥ رسالتك**\n\n${args}`)
+		.setTimestamp()
+		.setFooter(message.author.tag, message.author.avatarURL)
+		
+		message.channel.send(bcSure).then(msg => {
+			msg.react('✅').then(() => msg.react('❎'));
+			message.delete();
+			
+			
+			let yesEmoji = (reaction, user) => reaction.emoji.name === '✅'  && user.id === message.author.id;
+			let noEmoji = (reaction, user) => reaction.emoji.name === '❎' && user.id === message.author.id;
+			
+			let sendBC = msg.createReactionCollector(yesEmoji);
+			let dontSendBC = msg.createReactionCollector(noEmoji);
+			
+			sendBC.on('collect', r => {
+				        message.guild.members.forEach(m => {
    if(!message.member.hasPermission('ADMINISTRATOR')) return;
             var bc = new Discord.RichEmbed()
             .addField('» السيرفر :', `${message.guild.name}`)
             .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
             .addField(' » الرسالة : ', args)
-            .setColor('#ff0000')
+            .setColor('#000000')
             // m.send(`[${m}]`);
             m.send(`${m}`,{embed: bc});
         });
-    }
-    } else {
-        return;
-    }
+				message.channel.send(`:timer: **يتم الان الارسال الى** \`\`${message.guild.memberCount}\`\` **عضو**`).then(msg => msg.delete(5000));
+				msg.delete();
+			})
+			dontSendBC.on('collect', r => {
+				msg.delete();
+				message.reply(':white_check_mark: **تم الغاء ارسال رسالتك بنجاح**').then(msg => msg.delete(5000));
+			});
+		})
+	}
 });
 
     
@@ -1305,7 +1329,7 @@ client.on("guildMemberAdd", member => {
 
 client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
   var Narox ="f!" //prefix bot
-    if(DâRK.content.startsWith('<@533458616112513024>')) //id bot
+    if(DâRK.content.startsWith('<@5533964735402475542>')) //id bot
      var Dark = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setDescription(`Hey Im **${client.user.username}!**`)
@@ -1317,5 +1341,58 @@ client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
   .setTimestamp()
     DâRK.channel.send(Dark)
 });
+
+
+const devs = ["360529010842664971"]// ايدي الخاص بحسابك
+ 
+const adminprefix = "f!";//Narox
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!devs.includes(message.author.id)) return;
+     
+  if (message.content.startsWith(adminprefix + 'pt')) {
+    client.user.setGame(argresult);
+      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+  } else
+    if (message.content === (adminprefix + "Percie")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(adminprefix + 'wt')) {// لجعل البوت في حاله الواتشنق
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+  } else
+  if (message.content.startsWith(adminprefix + 'setprefix')) {//لتغير البريفكس
+  client.user.setPrefix(argresult).then
+      message.channel.send(`**Prefix Changed :white_check_mark: ${argresult}** `)
+  } else
+  if (message.content.startsWith(adminprefix + 'ls')) {// لجعل البوت في حاله الاستماع
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+  } else     //Narox
+    if (message.content.startsWith(adminprefix + 'setname')) {// لتغير اسم البوت
+  client.user.setUsername(argresult).then
+      message.channel.sendMessage(`**${argresult}** : Done `)
+  return message.reply("**Name Changed :white_check_mark:**");
+  } else
+    if (message.content.startsWith(adminprefix + 'setavatar')) {// لتغير صوره البوت
+  client.user.setAvatar(argresult);
+    message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+        } else    
+  if (message.content.startsWith(adminprefix + 'st')) {// لعمل ستريمنق للبوت
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+  }
+    if(message.content === adminprefix + "restart") {// لعمل ريسترت للبوت
+      if (!devs.includes(message.author.id)) return;
+          message.channel.send(`:warning:? **Bot restarting by ${message.author.username}**`);
+        console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(`?? Bot restarting... ??`);
+        console.log("===============================================\n\n");
+        client.destroy();
+        child_process.fork(__dirname + "/bot.js");
+        console.log(`Bot Successfully Restarted`);
+    }
+ 
+  });
 
 client.login(process.env.BOT_TOKEN);
