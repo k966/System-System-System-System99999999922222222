@@ -29,7 +29,7 @@ message.author.sendEmbed(embed)
 client.on("message", message => {
  if (message.content === "9help") {
   const embed = new Discord.RichEmbed() 
-      .setColor("#ffff00")
+      .setColor("#000000")
       .setThumbnail(message.author.avatarURL)
       .setDescription(`
 
@@ -74,9 +74,6 @@ client.on("message", message => {
 『9unmutechannel /فتح الشات』
 『9add.r / اضافه رتبه』
 『9delet / مسح روم』
-『9color 50 /انشاء 50 لون』
-『9color 100/انشاء 100 لون』
-『9color 140/انشاء 140 لوم』
 『9ct /انشاء روم كتابي』4
 『9cv /انشاء روم صوتي』
 『9bc /برودكاست』
