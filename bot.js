@@ -14,16 +14,8 @@ client.on("message", message => {
       .setColor("#000000")
       .setThumbnail(message.author.avatarURL)
       .setDescription(`
-***
-ملاحظه
-Special orders ان برفكس الاوامر المميزه او
 
-يختلف عن جميع الاوامر 
-Special orders برفكس الاوامر المميزه او 
-9!
-اما برفكس باقي الاوامر
-9
-***
+
 `)
 
 
@@ -43,7 +35,7 @@ client.on("message", message => {
 
 ***__وصف عن البوت__***
 **
-Fire bot 
+9LNG BOT
 متعدد الميزات و الاوامر فيه اوامر جميله يحتوي هذا البوت على
 خاصيه قائمه الالوان و تقدر تغير لونك زي برو بوت و مانع الاسبام و الترحيب 
 بصوره
