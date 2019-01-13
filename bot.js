@@ -740,22 +740,6 @@ client.on("message", (message) => {
 
 
 var prefix = "9";
-client.on("message", message => {
-
-            if (message.content.startsWith(prefix + "bc")) {
-                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-  let args = message.content.split(" ").slice(1);
-  var argresult = args.join(' '); 
-  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
- m.send(`${argresult}\n ${m}`);
-})
- message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`); 
- message.delete(); 
-};     
-});
-
-
-var prefix = "9";
 
 client.on('message', message => {
   if (message.author.bot) return;
@@ -1198,8 +1182,20 @@ client.on("guildMemberAdd", member => {
 }).catch(console.error)
 })
 
-
-
+client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
+  var Narox ="f!" //prefix bot
+    if(DâRK.content.startsWith('<@533964735402475542>')) //id bot
+     var Dark = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setDescription(`Hey Im **${client.user.username}!**`)
+    .addField('My Prefix' , `${Narox}` ,true)
+    .addField('Try To Use' , `${Narox}help` ,true)
+    .addField('Note' , `${Narox}This Bot Is Private For Server` ,true)
+    .addField('Bot Owner' , `<@360529010842664971>` ,true) //Coded By Narox & DâRKNîghT#1001
+    .addField('Bot Owner' , `<@314107064920178688>` ,true) //Coded By Narox & DâRKNîghT#1001
+  .setTimestamp()
+    DâRK.channel.send(Dark)
+});
 
 const devs = ["314107064920178688"]// ايدي الخاص بحسابك
  
