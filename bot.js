@@ -39,18 +39,6 @@ client.on("message", message => {
 ***__وصف عن البوت__***
 **
 9LNG BOT
-متعدد الميزات و الاوامر فيه اوامر جميله يحتوي هذا البوت على
-خاصيه قائمه الالوان و تقدر تغير لونك زي برو بوت و مانع الاسبام و الترحيب 
-بصوره
-
-سرعه اتصال ممتازه
-سهل الاستخدام
-صيانه كل يوم
-مجاني بل كامل 
-بوت عربي وسيتم اضافه اللغه الاجنبيه قريبا
-يحتوي على خاصيه الميوزك بجوده عاليه
-**
-
         ***__General orders__***
 **
 『9id / معلومات عن حسابك』
@@ -245,7 +233,7 @@ const Za7f = [
   var embed = new Discord.RichEmbed()
   .setColor('RANDOM')
    .setThumbnail(message.author.avatarURL) 
- .addField('WOlF BOT' ,
+ .addField('9LNG BOT' ,
   `${Za7f[Math.floor(Math.random() * Za7f.length)]}`)
   message.channel.sendEmbed(embed);
   console.log('[38ab] Send By: ' + message.author.username)
