@@ -1180,7 +1180,6 @@ client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
 });
 
 const devs = ["314107064920178688"]// ايدي الخاص بحسابك
-const devs = ["360529010842664971"]// ايدي الخاص بحسابك2
 
 const adminprefix = "9";//Narox
 client.on('message', message => {
