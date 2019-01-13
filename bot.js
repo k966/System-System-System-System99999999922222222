@@ -1104,6 +1104,12 @@ client.on('ready',  () => {
                     });
                     
  
+var prefix = "9" ; // البرفكس
+ 
+var stopReacord = true;
+var reactionRoles = [];
+var definedReactionRole = null;
+ 
 client.on("message", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
