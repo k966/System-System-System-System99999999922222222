@@ -1329,7 +1329,7 @@ client.on("guildMemberAdd", member => {
 
 client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
   var Narox ="f!" //prefix bot
-    if(DâRK.content.startsWith('<@5533964735402475542>')) //id bot
+    if(DâRK.content.startsWith('<@533964735402475542>')) //id bot
      var Dark = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setDescription(`Hey Im **${client.user.username}!**`)
@@ -1394,5 +1394,12 @@ client.on('message', message => {
     }
  
   });
+
+client.on("guildMemberAdd", (member) => {
+client.channels.get('533961427489259531').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+})
+client.on("guildMemberRemove", (member) => {
+client.channels.get('533961427489259531').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+})
 
 client.login(process.env.BOT_TOKEN);
