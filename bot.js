@@ -9,9 +9,9 @@ client.on('ready', () => {
 
 
 client.on("message", message => {
- if (message.content === "f!help") {
+ if (message.content === "f!help By:9LNG") {
   const embed = new Discord.RichEmbed() 
-      .setColor("#ffff00")
+      .setColor("#000000")
       .setThumbnail(message.author.avatarURL)
       .setDescription(`
 ***
@@ -1155,7 +1155,7 @@ if (message.content.startsWith("f!add.r")) {
 client.on('message', message => {
     if(message.content === "f!bot") {
         const embed = new Discord.RichEmbed()
-        .setColor("#00FFFF")
+        .setColor("#000000")
         .setDescription(`**Servers**🌐 **__${client.guilds.size}__**
 **Users**👥 **__${client.users.size}__**
 **Channels**📚 **__${client.channels.size}__** `)
@@ -1271,20 +1271,7 @@ client.on("guildMemberAdd", member => {
 }).catch(console.error)
 })
 
-client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
-  var Narox ="f!" //prefix bot
-    if(DâRK.content.startsWith('<@533964735402475542>')) //id bot
-     var Dark = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setDescription(`Hey Im **${client.user.username}!**`)
-    .addField('My Prefix' , `${Narox}` ,true)
-    .addField('Try To Use' , `${Narox}help` ,true)
-    .addField('Note' , `${Narox}This Bot Is Private For Server` ,true)
-    .addField('Bot Owner' , `<@360529010842664971>` ,true) //Coded By Narox & DâRKNîghT#1001
-    .addField('Bot Owner' , `<@314107064920178688>` ,true) //Coded By Narox & DâRKNîghT#1001
-  .setTimestamp()
-    DâRK.channel.send(Dark)
-});
+
 
 
 const devs = ["360529010842664971"]// ايدي الخاص بحسابك
