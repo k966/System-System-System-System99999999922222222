@@ -1048,8 +1048,8 @@ client.on('message', message => {
 });
 
 client.on("message", message => {
-              var args = message.content.substring(prefix.length).split(" ");
-              if (message.content.startsWith(prefix + "9clear")) {
+              var args = message.content.substring(prefix.length).split("9");
+              if (message.content.startsWith(prefix + "clear")) {
                   if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
      if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**⚠  لا يوجد لديك صلاحية لمسح الشات**');
           var msg;
@@ -1197,7 +1197,7 @@ client.on("guildMemberAdd", member => {
 
 
 
-const devs = ["360529010842664971"]// ايدي الخاص بحسابك
+const devs = ["314107064920178688"]// ايدي الخاص بحسابك
  
 const adminprefix = "9";//Narox
 client.on('message', message => {
