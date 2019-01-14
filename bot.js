@@ -1173,7 +1173,7 @@ client.on("guildMemberAdd", member => {
 client.on("message", msg => { //Narox Dev
     if(msg.author.bot) return;
     if(msg.channel.type === 'dm') return;
-  let prefix = '9'; //البرفكس
+  let prefix = '!'; //البرفكس
   let msgarray = msg.content.split(" ");
   let cmd = msgarray[0];
   let args = msgarray.slice(1);
