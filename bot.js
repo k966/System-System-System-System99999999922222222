@@ -535,38 +535,69 @@ delete warn[message.author.id];
 });
 
 
-client.on("message", message => {
-  if (message.author.bot) return;
-  
-  let command = message.content.split(" ")[0];
-  
-  if (command === "9mute") {
-        if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **").catch(console.error);
-  let user = message.mentions.users.first();
-  let modlog = client.channels.find('name', 'mute-log');
-  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
-  if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").catch(console.error);
-  if (message.mentions.users.size < 1) return message.reply('** يجب عليك منشنت شخص اولاً**').catch(console.error);
-  
-  const embed = new Discord.RichEmbed()
-    .setColor(0x00AE86)
-    .setTimestamp()
-    .addField('الأستعمال:', 'اسكت/احكي')
-    .addField('تم ميوت:', `${user.username}#${user.discriminator} (${user.id})`)
-    .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
-   
-   if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** لا يوجد لدي برمشن Manage Roles **').catch(console.error);
- 
-  if (message.guild.member(user).roles.has(muteRole.id)) {
-return message.reply("**:white_check_mark: .. تم اعطاء العضو ميوت**").catch(console.error);
-} else {
-    message.guild.member(user).addRole(muteRole).then(() => {
-return message.reply("**:white_check_mark: .. تم اعطاء العضو ميوت كتابي**").catch(console.error);
-});
+client.on('message', async message => {
+  if(message.author.bot) return;
+  let prefix = '9';
+
+  let command = message.content.split(" ")[0].slice(prefix.length);
+  let args = message.content.split(" ").slice(1);
+  if(!message.content.toLowerCase().startsWith(prefix)) return;
+
+  if(command == 'mute') {
+    if(!args.join(' ')) return message.channel.send(`${prefix}mute @user <time>`)
+    if(message.member.hasPermission('MANAGE_MESSAGES')) {
+      if(message.channel.permissionsFor(message.guild.member(client.user)).has(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
+        let role = message.guild.roles.find(r => r.name == 'Muted');
+        if(role) {
+          let member = message.mentions.members.first();
+          if(member) {
+            let time = args[1];
+            if(time) {
+              member.addRole(role.id)
+              setTimeout(function() {
+                member.removeRole(role.id);
+              }, ms(time));
+              message.guild.channels.forEach(async channel => {
+                channel.overwritePermissions(role, {
+                  READ_MESSAGES: false,
+                  SPEAK: false
+                });
+              });
+              message.channel.send(`${member.user.username} muted!`)
+              let log = message.guild.channels.find(c => c.name == 'mod-log')
+              if(log) log.send(`**${message.author.tag}** (${message.author.id}) **Muted ${member.user.tag}** | **Time:** \`${time}\``);
+            } else {
+              return message.channel.send(`${prefix}mute @user <time>`)
+            }
+          } else {
+            return message.channel.send(`${prefix}mute @user <time>`)
+          }
+        } else {
+          try {
+            message.guild.createRole({
+              name: 'Muted',
+              color: '#00ff00',
+              hoist: false
+            }, 'To mute members.').then(r => {
+              role = r;
+              message.guild.channels.forEach(async channel => {
+                channel.overwritePermissions(r, {
+                  READ_MESSAGES: false,
+                  SPEAK: false
+                });
+              });
+            });
+          } catch(e) {
+            console.error(e);
+          }
+        }
+      } else {
+        return message.channel.send(`:x: I need \`MANAGE_ROLES\` & \`MANAGE_CHANNELS\` permission to run this command!`)
+      }
+    } else {
+      return message.channel.send(`:x: You need \`MANAGE_MESSAGES\` permission to run this command!`)
+    }
   }
-
-};
-
 });
 
 
