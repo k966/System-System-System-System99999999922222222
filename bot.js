@@ -958,7 +958,7 @@ client.on('message', message => {
   });
 
 client.on(`message`, async message => {
-let args = message.content.trim().split(" ").slice(1); //substring(prefix.length) before split(" ") if you had a prefix.
+let args = message.content.trim().split("9").slice(1); //substring(prefix.length) before split(" ") if you had a prefix.
 let user = message.mentions.users.first();
 if(message.content.startsWith(prefix + "unlock")) {
 if(channels[message.author.id] !== undefined) {
