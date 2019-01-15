@@ -1009,7 +1009,7 @@ message.guild.channels.get(channels[message.author.id].channel).setName(args.joi
 });
 
 client.on('message', async message => {
-  if(message.content.startsWith(prefix + "اقتراح")) {
+  if(message.content.startsWith(prefix + "sug")) {
   await  message.channel.send(`اكتب اقتراحك الان`)
     let filter = m => m.author.id === message.author.id
       var text = '';
