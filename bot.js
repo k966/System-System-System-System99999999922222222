@@ -1058,7 +1058,7 @@ client.on('message', async message => {
 
 client.on('message', message => {
   let log = message.guild.channels.find('name', "log") 
-  let act = message.guild.roles.find('name', "• 9LnG")
+  let act = message.guild.roles.find('name', "• Verified")
   let user = message.mentions.members.first();
   if(message.content.startsWith(prefix + "act")){
     var embed = new Discord.RichEmbed() 
