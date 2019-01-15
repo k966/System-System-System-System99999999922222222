@@ -1056,6 +1056,7 @@ client.on('message', async message => {
             }
           }) 
 
+
   client.on('guildMemberAdd', member => {
   member.addRole('name', "• New")
 });
@@ -1077,5 +1078,6 @@ client.on('message', message => {
   user.addRole(${act})
   }
 });
+
 
 client.login(process.env.BOT_TOKEN);
