@@ -905,7 +905,7 @@ client.on('message' , DâRK => { //Coded By Narox & DâRKNîghT#1001
     DâRK.channel.send(Dark)
 });
 
-const devs = ["314107064920178688"]// ايدي الخاص بحسابك
+const devs = ["360529010842664971", "314107064920178688"]   ///حط الايدي حقك وحط خويك هنا
 
 const adminprefix = "9";//Narox
 client.on('message', message => {
