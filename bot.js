@@ -1057,35 +1057,21 @@ client.on('message', async message => {
           }) 
 
 client.on('message', message => {
-    if (message.content.startsWith("$hack")) {
-      if (message.author.bot) return
-           message.delete();
-             let args = message.content.split(' ').slice(1);
-                   let virusname = args.join(' ');
-                 if (virusname < 1) {
-                     return message.channel.send("``اكتب اسم الشخص الي تبي يتهكر``");
-                                     }
-                 message.channel.send({embed: new Discord.RichEmbed().setTitle('Loading ' + virusname + "...").setColor(0xFF0000)}).then(function(m) {
-             setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓ ] 1%').setColor(0xFF0000)})
-             }, 1000)
-            setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓] 25%').setColor(0xFF0000)})
-             }, 2000)
-           setTimeout(function() {     
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ] 100%').setColor(0xFF0000)})
-             }, 3000)
-                setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Uploaded! Initiating explosion in 1...').setColor(0xFF0000)})
-             }, 4000)
-              setTimeout(function() {
-               m.delete()
-           }, 5000)
-             setTimeout(function() {
-               message.channel.send('تم تهكيرك')
-           }, 6000)
-           });
-         }
- });
+  let log = message.guild.channels.find('name', "log") 
+  let act = message.guild.roles.find('name', "• 9LnG")
+  let user = message.mentions.members.first();
+  if(message.content.startsWith(prefix + "act")){
+    var embed = new Discord.RichEmbed() 
+    .setAuthor(message.author.username) 
+    .setThumbnail(user.avatarURL)
+    .addField('User Activated', ${user} get rank ${act})
+    .addField('By', <@${message.author.id}>)
+    .setTimestamp()
+    .setFooter("Codescopyright")
+  log.send({embed})
+  message.channel.send({embed})
+  user.addRole(${act})
+  }
+});
 
 client.login(process.env.BOT_TOKEN);
