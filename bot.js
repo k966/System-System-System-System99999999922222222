@@ -957,4 +957,56 @@ client.on('message', message => {
  
   });
 
+client.on(`message`, async message => {
+let args = message.content.trim().split(" ").slice(1); //substring(prefix.length) before split(" ") if you had a prefix.
+let user = message.mentions.users.first();
+if(message.content.startsWith(prefix + "unlock")) {
+if(channels[message.author.id] !== undefined) {
+if(user) {
+if(message.guild.channels.get(channels[message.author.id].channel).permissionsFor(user.id).has(`CONNECT`)) return message.channel.send(`**The user already can connect to your voice channel**\n to lock & kick user use \`\`!lock\`\` `);
+message.guild.channels.get(channels[message.author.id].channel).overwritePermissions(user.id, {
+CONNECT: true
+}).then(message.channel.send(`**${user.username}** can connect to your room now!`))
+} 
+else if(args.includes("all")) {
+message.guild.channels.get(channels[message.author.id].channel).overwritePermissions(message.guild.id, {
+CONNECT: true
+}).then(message.channel.send("**Everyone** can connect to your room now!"));
+} else return message.channel.send(`**Usage: !unlock [all | @user]**`)
+}
+}
+if(message.content.startsWith(prefix + "lock")) {
+ if(channels[message.author.id] !== undefined) {
+if(user) {
+if(!message.guild.channels.get(channels[message.author.id].channel).permissionsFor(user.id).has(`CONNECT`)) return message.channel.send(`**The user already cannot connect to your voice channel**`);
+try {
+if(message.guild.members.get(user.id).voiceChannelID === channels[message.author.id].channel) {
+message.guild.members.get(user.id).setVoiceChannel('آيدي الشنل الي يروح له العضو بعد ما يصير له lock'); // المكان الي راح ينحطوله بعد ما يصير لهم lock 
+}   
+} catch (error) {
+console.log(error)
+}
+message.guild.channels.get(channels[message.author.id].channel).overwritePermissions(user.id, {
+CONNECT: false
+}).then(message.channel.send(`:x: **${user.username}** cannot connect to your room now!`))
+} 
+else if(args.includes("all")) {
+message.guild.channels.get(channels[message.author.id].channel).overwritePermissions(message.guild.id, {
+CONNECT: false
+}).then(message.channel.send(":x: **Everyone** cannot connect to your room now!"));
+} else return message.channel.send(`**Usage: !lock [all | @user]**`)
+}   
+}
+if(message.content.startsWith(prefix + "rename")) {
+if(channels[message.author.id] !== undefined) {
+if(args.length <= 0) return message.channel.send(`:scroll: **Hmmm the name please*`);
+if(message.content.length > 7+15) return message.channel.send(`:x: It appears that's the max letters allowed is **15**.`)
+const oldName = await message.guild.channels.get(channels[message.author.id].channel).name
+message.channel.send(`:pencil2: Renamed **\`\`${oldName}\`\`** to **\`\`${args.join(" ").toString()}\`\`** alright?`)
+message.guild.channels.get(channels[message.author.id].channel).setName(args.join(" ").toString());
+}
+ }
+});
+
+
 client.login(process.env.BOT_TOKEN);
